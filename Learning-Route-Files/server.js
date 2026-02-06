@@ -3,23 +3,12 @@ const app = express();
 import users from './routes/users.js'
 const port = 8000;
 
+//middleware
+app.use(express.json()); //permette di mandare il json raw (da postman)
 
 
-app.use('/api/users', users)
-
-
-app.get('/', (req,res) => {
-
-    res.send('<h1>Sei nell homepage</h1>')
-})
-
-app.get('/about', (req,res) => {
-
-    res.send('<h1> questa è la pagina about us</h1>')
-})
-
-
-
+//rotte
+app.use('/', users)
 
 app.listen(port, () => {
 
