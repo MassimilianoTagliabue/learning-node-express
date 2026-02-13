@@ -3,8 +3,8 @@ const app = express();
 import users from './routes/users.js'
 const port = 8000;
 
-//middleware
-app.use(express.json()); //permette di mandare il json raw (da postman)
+//middleware converte il body JSON in un oggetto javascript
+app.use(express.json()); //permette di leggere il req.body delle richieste POST/PUT
 
 
 //rotte
