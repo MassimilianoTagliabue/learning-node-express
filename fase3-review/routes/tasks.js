@@ -14,12 +14,15 @@ router.get('/todos', (req,res) => {
 })
 
 //singola task
-router.get('/todos/:id', (req,res) => {
+router.get('/todos/:id', (req,res, next) => {
     const id = parseInt(req.params.id) //prendo l'id dall'url e lo trasformo in un intero
 
-    const selectedTask = tasks.filter( (task) => task.id === id); 
-    console.log(selectedTask);
-    
+    const selectedTask = tasks.find( (task) => task.id === id);    //con filter se non trova niente restituisce l'array vuoto
+    //console.log(selectedTask);
+    if(!selectedTask){      
+        const error = new Error(`il task con ${id} non è stato trovato`);  
+        return next(error)
+    }
     
     res.json(selectedTask);
 })
