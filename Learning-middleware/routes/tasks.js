@@ -44,6 +44,13 @@ router.delete('/todos/:id', (req,res) => {
 
     const taskToDelete = tasks.findIndex((task) => task.id === idToDelete);
 
+    console.log(taskToDelete);
+    
+    if(taskToDelete === (-1)){      
+        const error = new Error(`il task con ${id} non è stato trovato`);  
+        return next(error)
+    }
+    else
     tasks.splice(taskToDelete,1); //rimuovo elementi dall'array
 
     res.json(tasks);
